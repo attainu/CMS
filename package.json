@@ -1,0 +1,20 @@
+{
+  "name": "Perfect-Fitness",
+  "version": "1.0.0",
+  "description": "Project done by Abhijeet and Souvik",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/attainu/Perfect-Fitness.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/attainu/Perfect-Fitness/issues"
+  },
+  "homepage": "https://github.com/attainu/Perfect-Fitness#readme"
+}
