@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const { hash } = require('bcryptjs')
+const { hash , compare } = require('bcryptjs')
 const { sign } = require('jsonwebtoken')
 const adminSchema = new Schema({
     name: {
@@ -64,6 +64,20 @@ adminSchema.methods.generateToken = async function(){
         admin.accessToken = accessToken 
     await admin.save()
     return accessToken
+}
+
+adminSchema.statics.findByEmailAndPassword = async (email, password)=>{
+    try{
+        console.log("coming here")
+        const admin = await Admin.findOne({email: email})
+        if(!admin) throw new Error('Invalid Credentials')
+        const isMatched = await compare(password, admin.password)
+        if(!isMatched) throw new Error('Invalid Credentials')
+        return admin
+    }catch(err){
+        err.name = 'authError'
+        throw err
+    }
 }
 
 adminSchema.methods.toJSON = function(){

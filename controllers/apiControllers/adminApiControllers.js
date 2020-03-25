@@ -13,5 +13,10 @@ module.exports = {
             console.log(err)
             return res.status(500).send('Server Error')
         }
+    },
+    async adminLogin(req, res){
+        const admin = req.user
+        const accessToken = await admin.generateToken('login')
+        res.status(200).json({statusCode: 200, admin, accessToken: `JWT ${accessToken}`, expiresIn: '12h'})
     }
 }
