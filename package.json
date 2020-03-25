@@ -1,7 +1,7 @@
 {
-  "name": "Perfect-Fitness",
+  "name": "perfect-fitness",
   "version": "1.0.0",
-  "description": "Project done by Abhijeet and Souvik",
+  "description": "Project done by Himanshu and Nilesh",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,5 +16,18 @@
   "bugs": {
     "url": "https://github.com/attainu/Perfect-Fitness/issues"
   },
-  "homepage": "https://github.com/attainu/Perfect-Fitness#readme"
+  "homepage": "https://github.com/attainu/Perfect-Fitness#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.6",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
 }
