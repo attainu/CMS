@@ -9,7 +9,10 @@ const app = express()
 app.use(express.json())
 app.use(passport.initialize())
 
-app.use(require('./routes/apiRoutes/adminApiRoutes'))
+app.use(require('./routers/apiRoutes/adminApiRoutes'))
+app.use(require('./routers/apiRoutes/userApiRoutes'))
+app.use(require('./routers/normalRoutes/adminNormalRoues'))
+app.use(require('./routers/normalRoutes/userNormalRoutes'))
 
 app.get('/', (_, res)=>{res.status(200).json({Hey: 'Your project is gonna be awesome....!!!!!!!' })})
 

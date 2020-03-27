@@ -1,7 +1,8 @@
+const { compare } = require('bcryptjs')
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const { hash , compare } = require('bcryptjs')
-const { sign } = require('jsonwebtoken')
+const { hasingPassword, confirmationToken } = require('../utils/schemaRelated')
+// const { findByEmailAndPassword } = require('../faltu')
 const adminSchema = new Schema({
     name: {
         type: String,
@@ -37,38 +38,18 @@ const adminSchema = new Schema({
         type: Boolean,
         default: true,
     },
-    role:{
+    role: {
         type: String,
-        default: 'Admin'
+        default: 'Admin',
+        required: true
     }
 },
 {timestamps: true})
 
-adminSchema.pre('save', async function(next){
-    const admin = this
-    try{
-        if(admin.isModified('password')){
-            const hp = await hash(admin.password, 10)
-            admin.password = hp
-            next()
-        }
-    }catch(err){
-        console.log(err.message)
-        next(err)
-    }
-})
-
-adminSchema.methods.generateToken = async function(){
-    const admin = this
-    const accessToken = await sign({id: admin._id}, process.env.JWT_SECRET_KEY, {expiresIn: '12h'})
-        admin.accessToken = accessToken 
-    await admin.save()
-    return accessToken
-}
-
+adminSchema.pre('save', hasingPassword)
+adminSchema.methods.generateToken = confirmationToken
 adminSchema.statics.findByEmailAndPassword = async (email, password)=>{
     try{
-        console.log("coming here")
         const admin = await Admin.findOne({email: email})
         if(!admin) throw new Error('Invalid Credentials')
         const isMatched = await compare(password, admin.password)
