@@ -15,6 +15,7 @@ passport.use(
         passwordField: 'password'
     }, 
     async (email, password, done)=>{
+        console.log(email)
         try{
             let data = null
             if(email){
@@ -31,6 +32,7 @@ passport.use(
                     if(!user.isConfirm) return done(null, false, {message: 'Invalid Credentials'})
                     else data = user
                 }
+                
                 if (trainer) {
                     const trainer = await Trainer.findByEmailAndPassword(email, password)
                     if(!trainer.isConfirm) return done(null, false, {message: 'Invalid Credentials'})

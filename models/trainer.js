@@ -1,9 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const { compare }= require('bcryptjs')
-// const { findByEmailAndPassword } = require('../utils/commonControllers')
 const { hasingPassword, confirmationToken } = require('../utils/schemaRelated')
-// const {  } = require('jsonwebtoken')
 const trainerSchema = new Schema({
     adminId: {
         type: Schema.Types.ObjectId,

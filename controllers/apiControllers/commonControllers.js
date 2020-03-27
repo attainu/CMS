@@ -26,7 +26,9 @@ module.exports = {
       }
       if(role === 'Trainer'){
         const trainer = await Trainer.findByEmailAndPassword(email, oldPassword)    
+      
         await trainer.updateOne({ password: hp })
+        console.log(trainer)
         res.status(200).json({ statusCode: 200, message: 'Password Changed successfully'})
       }
       if(role === 'Admin'){
@@ -49,25 +51,20 @@ module.exports = {
       const trainer = await Trainer.findOne({ perEmail })
       const user = await User.findOne({ email });
       if(perEmail){
+        console.log(perEmail)
         if(admin){
-          // if (!admin) {return res.status(400).json({ statusCode: 400, message: 'There is no Admin with this email.' })}
           await admin.generateToken("trainerReset")
           res.status(200).json({ statusCode:200, message: 'Email sent successfully. Please Check your inbox' })
         }
         if(trainer){
           const trainer = await Trainer.findOne({ perEmail });
-          // if (!trainer) {return res.status(400).json({ statusCode: 400, message: 'There is no trainer present. Kindly register First' })}
           await trainer.generateToken("trainerReset");
           res.status(200).json({ statusCode: 200, message: 'Email sent successfully. Please Check your inbox' })
         }
       }
       else if(email){
-        // if (!user) {return res.status(400).json({ statusCode: 400, message: "There is no user present. Kindly register First"});}
         await user.generateToken("reset");
         res.status(200).json({ statusCode: 200, message: "Email sent successfully. Please Check your inbox" });
-      }
-      else{
-        return res.status(400).json({ statusCode: 400, message: 'A valid Email is required'});
       }
     } catch (err) {
       res.status(500).json({ statusCode: 500, message: 'Server Error' });
@@ -75,12 +72,14 @@ module.exports = {
   },
   async renderAllResetPassword(req, res){
     const { resetToken } = req.params
+    console.log(resetToken)
     const {newPassword, confirmPassword} = {...req.body}
     const hp = await hash(newPassword, 10)
     try {
       // Finding the user with the help of token
       const admin = await Admin.findOne( { resetToken } );
-      const trainer = await Trainer.findOne( { resetToken } );
+      const trainer = await Trainer.findOne( { resetToken:resetToken } );
+      console.log(trainer)
       const user = await User.findOne( { resetToken } );
       if( newPassword !== confirmPassword )return res.status(400).json({ statusCode: 400, message: 'Password Do not match' })
       if(admin){
@@ -89,7 +88,8 @@ module.exports = {
         res.status(200).json({ statusCode: 200, message: 'newPassword set successfully' })
       }
       else if(trainer){
-        await trainer.updateOne({password: hp, resetToken: ""})
+       const u = await trainer.updateOne({password: hp, resetToken: ""})
+        console.log(u)
         trainer.save()
         res.status(200).json({ statusCode: 200, message: 'newPassword set successfully' })  
       } 
