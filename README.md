@@ -1,2 +1,2 @@
-# CMS
-Project done by Abhijeet and Souvik
+# Perfect-Fitness
+Project done by Nilesh and Himanshu
