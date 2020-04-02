@@ -1,4 +1,3 @@
-const sendMailToUser = require('../../utils/mailer')
 const Product = require('../../models/Product')
 const Order = require('../../models/Order')
 const Cart = require('../../models/Cart')
@@ -66,42 +65,27 @@ module.exports = {
     async orderVerify(req, res) {
       const { amount, currency, razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
       try {
-        if(req.user.role === 'Admin'){
-          const createdSignature = createSignature( razorpay_order_id, razorpay_payment_id );
-          if (createdSignature !== razorpay_signature) { return res.status(401).send({ statusCode: 401, message: "Invalid payment request" })}
-          await instance.payments.capture( razorpay_payment_id, amount, currency );
-          const o = await Order.find({razorpay_order_id });
-          if (!o) { return res.status(401).send({ statusCode: 401, message: "Invalid payment request" });}
-          const proArray = o[0].txnId
-          let uemail = null
-          for(let i=0; i<o.length; i++ ){
-            await  o[i].updateOne({razorpay_payment_id, razorpay_signature, isPending: false})
-            const t = o[i].productId
-            const u = o[i].userId
-            const train = await Trainer.findOne({_id: t})
-            const mem = await Membership.findOne({_id: t})
-            const wo = await Workout.findOne({_id: t})
-            const dp = await Diet.findOne({_id: t})
-            const user = await User.findOne({_id: u})
-            const mail = user.email
-            uemail = mail
-            if(train){
-              await User.updateOne({_id: u}, {$set: { personalTrainer: t }})
-            }
-            if(mem){
-              await User.updateOne({_id: u}, {$set: { memberShip: t }})
-            }
-            if(wo){
-              await sendMailToUser('Workout', mail, wo.eBook)
-            }          
-            if(dp){
-              await sendMailToUser('dietplan', mail, dp.eBook)
-            }
-            await Cart.deleteMany({userId: u})
+        const createdSignature = createSignature( razorpay_order_id, razorpay_payment_id );
+        if (createdSignature !== razorpay_signature) { return res.status(401).send({ statusCode: 401, message: "Invalid payment request" })}
+        await instance.payments.capture( razorpay_payment_id, amount, currency );
+        const o = await Order.find({razorpay_order_id });
+        if (!o) { return res.status(401).send({ statusCode: 401, message: "Invalid payment request" });}
+        for(let i=0; i<o.length; i++ ){
+          await  o[i].updateOne({razorpay_payment_id, razorpay_signature, isPending: false})
+          const t = o[i].productId
+          const u = o[i].userId
+          const train = await Trainer.findOne({_id: t})
+          const mem = await Membership.findOne({_id: t})
+          if(train){
+            await User.updateOne({_id: u}, {$set: { personalTrainer: t }})
           }
-          await sendMailToUser('order', uemail, proArray )       
-          return res.status(200).json({statusCode: 200, message: 'Payment captured Successfully...!!!'});
+          if(mem){
+            await User.updateOne({_id: u}, {$set: { memberShip: t }})
+          }
+          await Cart.deleteMany({userId: u})
         }
+        
+        return res.status(200).json({statusCode: 200, message: 'Payment captured Successfully...!!!'});
       } catch (err) {
         res.status(500).send({ statusCode: 500, message: "Server Error" });
       }

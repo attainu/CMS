@@ -7,6 +7,6 @@ const { createOrder,
 
 router.post('/order/:productId', passport.authenticate('jwt', {session: false}), createOrder)
 router.post('/cart/order', passport.authenticate('jwt', {session: false}), createCartOrder)
-router.post('/verify', passport.authenticate('jwt', {session: false}), orderVerify)
+router.post('/verify', orderVerify)
 
 module.exports = router

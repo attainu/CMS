@@ -14,18 +14,10 @@ module.exports = {
     },
     async getTrainer(req,res){
         try {
-            const tra = await Trainer.find({});
-            const trainer = []
-            for(let i=0; i<tra.length; i++){
-                const obj = {}
-                obj.name = tra[i].name
-                obj.price = tra[i].price
-                trainer.push(obj)
-            }
-            
-            return res.status(200).json({ statusCode: 200, trainer })
+            const trainer = await Trainer.find({});
+            return res.status(200).json({ statusCode: 200, trainerName: trainer.name, trainerFee: trainer.price })
           } catch (err) {
-              return res.status(500).json({ statusCode: 500, message: 'Server Error' })
+              return res.state(500).json({ statusCode: 500, message: 'Server Error' })
           }
     }
 }

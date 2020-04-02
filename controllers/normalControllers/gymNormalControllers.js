@@ -1,5 +1,4 @@
 const Gyms = require('../../models/Gyms')
-const domainName = process.env.DOMAIN_NAME || `http://localhost:1234`;
 module.exports = {
     async findPFgym(req, res){
         function escapeRegex(text) {
@@ -33,7 +32,7 @@ module.exports = {
             for(let k=0;k<farr.length;k++){
                 const obj = {}
                 obj.state = farr[k]
-                obj.city = `${domainName}/findgym/state/${farr[k]}`
+                obj.city = `http://localhost:1234/findgym/state/${farr[k]}`
                 arr1.push(obj)
             }
             return res.status(200).json(arr1)
@@ -57,7 +56,7 @@ module.exports = {
             for(let k=0;k<farr.length;k++){
                 const obj = {}
                 obj.city = farr[k]
-                obj.detaills = `${domainName}/findgym/city/${farr[k]}`
+                obj.detaills = `http://localhost:1234/findgym/city/${farr[k]}`
                 arr1.push(obj)
             }
             return res.status(200).json(arr1)

@@ -1,5 +1,4 @@
 const Membership = require('../../models/Membership')
-const domainName = process.env.DOMAIN_NAME || `http://localhost:1234`;
 
 module.exports = {
     async findPF_Ms(req, res){
@@ -34,7 +33,7 @@ module.exports = {
             for(let k=0;k<farr.length;k++){
                 const obj = {}
                 obj.state = farr[k]
-                obj.city = `${domainName}/findMS/state/${farr[k]}`
+                obj.city = `http://localhost:1234/findMS/state/${farr[k]}`
                 arr1.push(obj)
             }
             return res.status(200).json(arr1)
@@ -59,7 +58,7 @@ module.exports = {
             for(let k=0;k<farr.length;k++){
                 const obj = {}
                 obj.city = farr[k]
-                obj.detaills = `${domainName}/findMS/city/${farr[k]}`
+                obj.detaills = `http://localhost:1234/findMS/city/${farr[k]}`
                 arr1.push(obj)
             }
             return res.status(200).json(arr1)
