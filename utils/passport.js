@@ -4,10 +4,9 @@ const {Strategy: JWTStrategy, ExtractJwt} = require('passport-jwt')
 const {Strategy: GoogleStrategy} = require('passport-google-oauth20')
 const {Strategy: FacebookStrategy} = require('passport-facebook')
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET } = process.env
-const User = require('./models/users')
-const Admin = require('./models/admin')
-const Trainer = require('./models/trainer')
-
+const User = require('../models/Users')
+const Admin = require('../models/Admin')
+const Trainer = require('../models/Trainer')
 // passport-local Strategy for user-login 
 passport.use(
     new localStrategy({
@@ -15,7 +14,6 @@ passport.use(
         passwordField: 'password'
     }, 
     async (email, password, done)=>{
-        console.log(email)
         try{
             let data = null
             if(email){
@@ -32,7 +30,6 @@ passport.use(
                     if(!user.isConfirm) return done(null, false, {message: 'Invalid Credentials'})
                     else data = user
                 }
-                
                 if (trainer) {
                     const trainer = await Trainer.findByEmailAndPassword(email, password)
                     if(!trainer.isConfirm) return done(null, false, {message: 'Invalid Credentials'})
@@ -41,7 +38,7 @@ passport.use(
             }
             return done(null, data)
         }catch(err){
-            if(err.name === 'authError') done(null, false, {message: 'Invalid Credential'})
+            if(err.name === 'authError') done(null, false, {message: err.message})
             done(err)
         }
     })

@@ -45,6 +45,14 @@ const userSchema = new Schema({
     role: {
         type: String,
         default: 'User'
+    },
+    personalTrainer: {
+        type: Schema.Types.ObjectId,
+        ref: 'Trainer'
+    },
+    memberShip: {
+        type: Schema.Types.ObjectId,
+        ref: 'Membership'
     }
 },
 {timestamps: true})

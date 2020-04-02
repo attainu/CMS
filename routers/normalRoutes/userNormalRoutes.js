@@ -4,8 +4,7 @@ const router = Router()
 const { renderConfirmEmail } = require('../../controllers/apiControllers/commonControllers')
 const { getUserProfile, 
         fetchGooglePofile, 
-        fetchfacebookPofile, 
-     } = require('../../controllers/normalControllers/userNormalController')
+        fetchfacebookPofile } = require('../../controllers/normalControllers/userNormalController')
 
 router.get('/user/profile', passport.authenticate('jwt' , {session: false}) , getUserProfile)
 router.get('/user/google', passport.authenticate('google', {session: false, scope: ['profile', 'email']}))

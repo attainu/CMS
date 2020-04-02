@@ -2,7 +2,7 @@ const { compare } = require('bcryptjs')
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const { hasingPassword, confirmationToken } = require('../utils/schemaRelated')
-
+// const { findByEmailAndPassword } = require('../faltu')
 const adminSchema = new Schema({
     name: {
         type: String,

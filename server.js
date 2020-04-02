@@ -1,2 +1,3 @@
 const app = require('./app')
-app.listen(1234, ()=> console.log('Server connected successfully....!!!'))
+const PORT = process.env.PORT || 1234
+app.listen(PORT, ()=> console.log('Server connected successfully....!!!'))

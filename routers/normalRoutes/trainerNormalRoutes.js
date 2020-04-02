@@ -1,8 +1,9 @@
 const passport = require('passport')
 const { Router } = require('express')
 const router = Router()
-const { trainerConfirmEmail } = require('../../controllers/normalControllers/trainerNormalController')
+const { trainerConfirmEmail,
+        getTrainer } = require('../../controllers/normalControllers/trainerNormalController')
 
 router.get("/trainer/confirm/:confirmToken", trainerConfirmEmail)
-
+router.get('/allTrainer', getTrainer)
 module.exports = router

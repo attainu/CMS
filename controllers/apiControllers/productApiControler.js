@@ -1,4 +1,4 @@
-const Product = require('../../models/product')
+const Product = require('../../models/Product')
 const cloudinary = require('../../utils/coludinary')
 const convertBufferToString = require('../../utils/convertBufferToString')
 
@@ -15,24 +15,10 @@ module.exports = {
                     return res.status(400).json({ statusCode: 400, message: "Bad request" });
                 }
                 const product = await Product.create({ productName, brand, price, category, adminId, image});
-                res.status(201).json({stausCode: 201, product})
+                return res.status(201).json({stausCode: 201, product})
             }
         }catch(err){
-            console.log(err)
-            throw err
-        }
-    },
-    async deletePFProduct(req, res){
-        const { productId } = req.params
-        try{
-            if(req.user.role === 'Admin'){
-                const product = await Product.deleteOne({ _id: productId })
-                if(!product) { return res.status(400).json({ statusCode: 400, message: 'No Such Product exist' }) }
-                  res.status(200).json({ statusCode: 200, message: 'Product deleted successfully' })
-            }
-        }catch(err){
-            console.log(err)
-            throw err    
+            return res.status(500).json({ statusCode: 500, message: 'Server Error' })
         }
     },
     async updatePFProduct(req,res){
@@ -52,11 +38,10 @@ module.exports = {
                     if(image) await product.updateOne({ image })
                     if(brand) await product.updateOne({ brand })
                 }
-                res.status(200).json({ statusCode: 200, message: 'Updated Sucseesfully' });
+                return res.status(200).json({ statusCode: 200, message: 'Updated Sucseesfully' });
             }
         }catch(err){
-            console.log(err)
-            throw err
+            return res.status(500).json({ statusCode: 500, message: 'Server Error' })
         }
     }
 }

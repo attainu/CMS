@@ -50,6 +50,10 @@ const trainerSchema = new Schema({
         type: String,
         default: 'Trainer',
         require: true
+    },
+    price:{
+        type: Number,
+        required: true
     }
 },
 {timestamps: true})

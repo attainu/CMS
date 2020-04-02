@@ -1,7 +1,7 @@
 const passport = require('passport')
 const { Router } = require('express')
 const router = Router()
-const { registerTrainer, 
+const { registerTrainer,
         deletePFTrainer } = require('../../controllers/apiControllers/trainerApiController')
 
 router.post('/add/trainer', passport.authenticate('jwt', {session: false}), registerTrainer)
