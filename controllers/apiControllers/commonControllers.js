@@ -9,7 +9,9 @@ const Diet = require('../../models/Diet')
 const cloudinary = require('../../utils/coludinary')
 const convertBufferToString = require('../../utils/convertBufferToString')
 const Membership = require('../../models/Membership')
+
 module.exports = {
+
   async commonLogin(req, res){
     try{
       const commenUser = req.user
@@ -247,6 +249,16 @@ module.exports = {
         }
     }catch(err){
         return res.status(500).json({ statusCode: 500, message: 'Server Error' })
+    }
+  },
+  async commonLogOut(req, res){
+    try{
+      const commenUser = req.user
+      await commenUser.updateOne({accessToken: ""})
+      commenUser.save()
+      return res.status(200).json({statusCode: 200, message: 'LogOut Successfully'})  
+    }catch(err){
+      return res.status(500).json({ statusCode: 500, message: 'Server Error' })
     }
   }
 }

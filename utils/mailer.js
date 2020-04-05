@@ -14,7 +14,7 @@ const transport = {
 }
 const mailTranport =nodemailer.createTransport(transport)
 
-mailTranport.verify().then((res)=>{console.log(res)}).catch((err)=>{console.log(err)})
+// mailTranport.verify().then((res)=>{console.log(res)}).catch((err)=>{console.log(err)})
 
 const sendMailToUser = async (mode, email, token) => {
     const domainName = process.env.DOMAIN_NAME || `http://localhost:1234`;

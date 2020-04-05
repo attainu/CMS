@@ -1,20 +1,13 @@
 const express = require('express')
 const passport = require('passport')
 const dotenv = require('dotenv')
-const cors = require("cors")
-
 dotenv.config()
-require('./db')
+const db = require('./db')
+db.connect().then((res)=>{console.log(res)})
 require('./utils/passport')
 require('./utils/razorpay')
 const app = express()
 app.use(express.json())
-app.use(
-    cors({
-      origin: "http://localhost:1234",
-      allowedHeaders: ["Content-Type"]
-    })
-  )
 app.use(passport.initialize())
 
 app.use(require('./routers/apiRoutes/userApiRoutes'))

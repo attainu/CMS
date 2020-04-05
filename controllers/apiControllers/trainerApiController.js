@@ -1,19 +1,24 @@
 const Trainer = require('../../models/Trainer')
+const { validationResult } = require('express-validator')
+
 module.exports = { 
     async registerTrainer(req, res){
         try{
+            const error = validationResult(req)
+            if(!error.isEmpty()){
+                return res.status(400).json({statusCode: 400, message: error.array()})
+            }
             if(req.user.role === 'Admin'){
                 const adminId  = req.user._id
-                const { email, perEmail, name, password, price } = req.body;
+                const { email, perEmail, name, password, price, isConfirm} = req.body;
                 if (!email || !perEmail || !name || !password || !adminId || !price) {
                     return res.status(400).json({ statusCode: 400, message: "Bad request" });
                 }
-                const trainer = await Trainer.create({ email, name, password, perEmail, adminId, price });
+                const trainer = await Trainer.create({ email, name, password, perEmail, adminId, price, isConfirm });
                 await trainer.generateToken({mode:'trainerConfirm', email: email, password: password });
                 return res.status(201).json({statusCode: 201, confirmation: 'Confrmation Email has been sent successfully please check your mail to confrim the Account.'});
             }
         }catch(err){
-            console.log(err)
             return res.status(500).json({ statusCode: 500, message: 'Server Error' })
         }
     },

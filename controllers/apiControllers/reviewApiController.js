@@ -8,11 +8,9 @@ module.exports = {
                 const userId = req.user._id
                 const { productId } = req.params
                 const { name , review  } = req.body
-                console.log(userId,productId,name,review)
                 if (!productId || !name || !review || !userId)  return res.status(400).json({ statusCode: 400, message: "Bad request" });
                 const reviewCreate = await Review.create({name , userId , productId , review})
-                console.log(reviewCreate,123)
-                    return res.status(201).json({statusCode: 201, reviewCreate})
+                return res.status(201).json({statusCode: 201, reviewCreate})
                 }
 
         }catch(err){
@@ -27,7 +25,7 @@ module.exports = {
                 const reviewUpdate = await Review.findOne({_id:reviewId})
                 if(!reviewUpdate) return res.status(400).json({ statusCode: 400, message: "Bad request" });
                 await reviewUpdate.updateOne({ review })
-                return res.status(201).json({statusCode: 201, reviewUpdate})
+                return res.status(200).json({statusCode: 200, message: "Review Updated Successfully"})
             }
 
     }catch(err){
@@ -41,7 +39,7 @@ module.exports = {
                 const deleteReview = await Review.findOne({_id:reviewId})
                 if(!deleteReview) return res.status(400).json({ statusCode: 400, message: "No such review" });
                 await deleteReview.deleteOne({_id:reviewId})
-                return res.status(201).json({statusCode: 201, message:"Delete Done"})
+                return res.status(200).json({statusCode: 200, message:"Review Deleted Successfully"})
             }
         }catch(err){
             return res.status(500).json({ statusCode: 500, message: 'Server Error' })
