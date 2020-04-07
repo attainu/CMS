@@ -88,7 +88,7 @@ passport.use(new JWTStrategy(jwtOptions, async ({id}, done)=>{
 const googleOptions = {
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: `http://localhost:1234/google/redirect`
+    callbackURL: `${process.env.DOMAIN_NAME}/google/redirect`
 }
 passport.use(new GoogleStrategy(googleOptions, async(_, __, googleProfile, done)=>{
     try{
@@ -107,7 +107,7 @@ passport.use(new GoogleStrategy(googleOptions, async(_, __, googleProfile, done)
 const facebookOptions = {
     clientID: FACEBOOK_CLIENT_ID,
     clientSecret: FACEBOOK_CLIENT_SECRET,
-    callbackURL: `http://localhost:1234/facebook/redirect`,
+    callbackURL: `${process.env.DOMAIN_NAME}/facebook/redirect`,
     profileFields: [ 'id', 'emails', 'name' ]
 }
 passport.use(new FacebookStrategy(facebookOptions, async(_, __, facebookProfile, done)=>{

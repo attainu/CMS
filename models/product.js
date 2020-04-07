@@ -30,6 +30,10 @@ const productSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "admin",
         required: true
+    },
+    search: {
+        type: String,
+        required: true
     }
 },
 {timestamps: true})
