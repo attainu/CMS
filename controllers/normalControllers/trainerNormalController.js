@@ -38,39 +38,47 @@ module.exports = {
             let trainerInfo = {}
             trainerInfo.name = trainer.name
             trainerInfo.price = trainer.price
-            const trainerWorkoutPlan = await Workout.findOne({trainerId:trainerId})
+            const trainerWorkoutPlan = await Workout.find({trainerId:trainerId})
             console.log(trainerWorkoutPlan)
-            let trainerWorkout = {}
-            if(trainerWorkoutPlan) {
-                trainerWorkout.workoutPlan = trainerWorkoutPlan.workoutPlan
-                trainerWorkout.category = trainerWorkoutPlan.category
-                trainerWorkout.price = trainerWorkoutPlan.price
-            }
-            const trainerDietPlan = await Diet.findOne({trainerId:trainerId})
-            let trainerDiet = {}
-            if(trainerDietPlan){
-                trainerDiet.dietPlan = trainerDietPlan.dietPlan
-                trainerDiet.category = trainerDietPlan.category
-                trainerDiet.price = trainerDietPlan.price
-            }
+            const workout = []
 
-            function isEmpty(obj) {
-                for(var key in obj) {
-                    if(obj.hasOwnProperty(key))
-                        return false;
-                }
-                return true;
+            for(let i=0; i<trainerWorkoutPlan.length; i++){
+                const obj = {}
+                obj.name = trainerWorkoutPlan[i].workoutPlan
+                obj.price = trainerWorkoutPlan[i].price
+                obj.image = trainerWorkoutPlan[i].image
+                obj.category = trainerWorkoutPlan[i].category
+                workout.push(obj)
             }
+            const trainerDietPlan = await Diet.find({trainerId:trainerId})
+            
+            const diet = []
+            for(let i=0; i<trainerDietPlan.length; i++){
+                const obj = {}
+                obj.name = trainerDietPlan[i].dietPlan
+                obj.price = trainerDietPlan[i].price
+                obj.image = trainerDietPlan[i].image
+                obj.category = trainerDietPlan[i].category
+                diet.push(obj)
+            }     
 
-            if(isEmpty(trainerDiet)){
-                traDiet = null
-            }
-            if(isEmpty(trainerWorkout)){
-                traWorkout = null
-            }
+            // function isEmpty(obj) {
+            //     for(var key in obj) {
+            //         if(obj.hasOwnProperty(key))
+            //             return false;
+            //     }
+            //     return true;
+            // }
+
+            // if(isEmpty(trainerDiet)){
+            //     traDiet = null
+            // }
+            // if(isEmpty(trainerWorkout)){
+            //     traWorkout = null
+            // }
 
          
-            return res.status(200).json({ statusCode: 200,  trainerInfo , trainerDiet ,trainerWorkout }) 
+            return res.status(200).json({ statusCode: 200,  trainerInfo , diet , workout }) 
         }catch(err){
             console.log(err)
            return res.status(500).json({ statusCode: 500, message: 'Server Error' })
