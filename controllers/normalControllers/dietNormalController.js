@@ -20,7 +20,7 @@ module.exports = {
     },
     async getVeg(req,res){
         try{
-                const di = await Diet.find({category:"begineer"})
+                const di = await Diet.find({category:"veg"})
                 const diet = []
                 for(let i=0; i<di.length; i++){
                     const obj = {}
@@ -38,7 +38,7 @@ module.exports = {
     },
     async getNonveg(req,res){
         try{
-                const di = await Diet.find({category:"intermediate"})
+                const di = await Diet.find({category:"non-veg"})
                 const diet = []
                 for(let i=0; i<di.length; i++){
                     const obj = {}
@@ -56,7 +56,7 @@ module.exports = {
     },
     async getkitto(req,res){
         try{
-                const di = await Diet.find({category:"professional"})
+                const di = await Diet.find({category:"kitto"})
                 const diet = []
                 for(let i=0; i<di.length; i++){
                     const obj = {}

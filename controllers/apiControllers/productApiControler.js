@@ -8,13 +8,14 @@ module.exports = {
             if(req.user.role === 'Admin'){
                 const imageContent =await  convertBufferToString(req.file.originalname,req.file.buffer);
                 const imageResponse = await cloudinary.uploader.upload(imageContent)
-                const image = imageResponse.secure_url
+                const image = imageResponse.secure_url || req.body.image
                 const adminId = req.user._id
                 const { productName, brand, price, category } = req.body
+                const search = productName+brand+category
                 if (!productName || !brand || !price || !category || !adminId) {
                     return res.status(400).json({ statusCode: 400, message: "Bad request" });
                 }
-                const product = await Product.create({ productName, brand, price, category, adminId, image});
+                const product = await Product.create({ productName, brand, price, category, adminId, image, search});
                 return res.status(201).json({stausCode: 201, product})
             }
         }catch(err){

@@ -47,7 +47,7 @@ module.exports = {
     },
     async getSuppliments(req,res){
         try{
-            const suppliments = await Product.find({category:"suppliments"})
+            const suppliments = await Product.find({category:"supplements"})
             if(!suppliments) return res.status(400).json({ statusCode: 400, message: 'No Such Category Exists'})
             return res.status(200).json({ statusCode: 200, suppliments})
         }catch(err){

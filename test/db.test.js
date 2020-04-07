@@ -222,7 +222,7 @@ describe('DataBseRelatedTests', function(){
     })
 
     test('should get a response of GET/', function(done){
-        request(app).get('/product/suppliments').then((res)=>{
+        request(app).get('/product/supplements').then((res)=>{
             expect(res.body.statusCode).toBe(200)
             done()
         })

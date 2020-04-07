@@ -11,7 +11,7 @@ const { getSearchedProduct,
 router.get('/searchproduct',getSearchedProduct)
 router.get('/all/product' , getAllProduct)
 router.get('/single/product', getSingleProduct)
-router.get('/product/suppliments' , getSuppliments)
+router.get('/product/supplements' , getSuppliments)
 router.get('/product/gymwears' ,getGymWeras)
 router.get('/product/gymgears', getGymGears)
 
