@@ -16,10 +16,9 @@ describe('DataBseRelatedTests', function(){
 
     test('should get a response of POST/', function(done){
         request(app).post('/user/register').send({
-            "name": "Himanshu",
-            "email": "hkashyap488@gmail.com",
+            "name": "nilesh",
+            "email": "nilesh221990@gmail.com",
             "password": "1234",
-            "confirmToken": "123456789",
             "isConfirm": true
         }).then((res)=>{
             expect(res.body.statusCode).toBe(201)
@@ -29,7 +28,7 @@ describe('DataBseRelatedTests', function(){
 
     test('should get a response of POST/', function(done){
         request(app).post('/forgot-password').send({
-                "email": "hkashyap488@gmail.com"
+                "email": "nilesh221990@gmail.com"
         }).then((res)=>{
             expect(res.body.statusCode).toBe(200)
             done()
@@ -38,7 +37,7 @@ describe('DataBseRelatedTests', function(){
 
     test('should get a response of POST/', function(done){
         request(app).post('/login').send({
-            "email": "hkashyap488@gmail.com",
+            "email": "nilesh221990@gmail.com",
             "password": "1234",
         }).then((res)=>{
             token = res.body.accessToken
@@ -51,7 +50,7 @@ describe('DataBseRelatedTests', function(){
 
     test('should get a response of POST/', function(done){
         request(app).post('/user/crteate-password').set({ Authorization: token }).send({
-                "email": "hkashyap488@gmail.com",
+                "email": "nilesh221990@gmail.com",
                 "newPassword": "4321",
                 "confirmPassword": "4321"
         }).then((res)=>{

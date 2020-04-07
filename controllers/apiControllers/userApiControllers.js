@@ -14,6 +14,7 @@ module.exports = {
                 return res.status(400).json({ statusCode: 400, message: "Bad request" });
             }
             const user = await User.create({ email, name, password, isConfirm});
+            console.log(await user.generateToken('confirm'),1234)
             await user.generateToken('confirm');
             return res.status(201).json({statusCode: 201, confirmation: 'Confrmation Email has been sent successfully please check your mail to confrim the Account.'});
         }catch(err){

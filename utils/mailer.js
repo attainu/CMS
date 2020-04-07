@@ -75,7 +75,7 @@ const sendMailToUser = async (mode, email, token) => {
         html
       })
     } catch (err) {
-      res.status(400).json({ statusCode: 400, message: 'Server Error' })
+      console.log(err)
     }
 }
 
