@@ -49,7 +49,7 @@ describe('DataBseRelatedTests', function(){
     })
 
     test('should get a response of POST/', function(done){
-        request(app).post('/user/crteate-password').set({ Authorization: token }).send({
+        request(app).post('/user/create-password').set({ Authorization: token }).send({
                 "email": "nilesh221990@gmail.com",
                 "newPassword": "4321",
                 "confirmPassword": "4321"
