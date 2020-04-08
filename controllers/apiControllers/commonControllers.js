@@ -62,7 +62,6 @@ module.exports = {
           return res.status(200).json({ statusCode:200, message: 'Email sent successfully. Please Check your inbox' })
         }
         if(trainer){
-          const trainer = await Trainer.findOne({ perEmail });
           await trainer.generateToken("trainerReset");
           return res.status(200).json({ statusCode: 200, message: 'Email sent successfully. Please Check your inbox' })
         }

@@ -31,7 +31,7 @@ module.exports = {
                     diet.push(obj)
                 }
                 if(!diet) return res.status(400 ).json({ statusCode: 400, message:"No such diet" })
-                return res.status(200).json({ statusCode: 200, di})
+                return res.status(200).json({ statusCode: 200, diet})
         }catch(err){
             return res.status(500).json({statusCode: 500, message:"Server  Error"}) 
         }
