@@ -13,6 +13,6 @@ router.post('/user/register',[
     check('password', 'password is required').not().isEmpty(),
     check('password', 'Password should be of atleast 4 charaters').isLength({min: 4}) 
 ], registerUser)
-router.post('/user/crteate-password', passport.authenticate('jwt', {session: false}), createUserPassword)
+router.post('/user/create-password', passport.authenticate('jwt', {session: false}), createUserPassword)
 
 module.exports = router
