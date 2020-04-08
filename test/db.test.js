@@ -19,7 +19,6 @@ describe('DataBseRelatedTests', function(){
             "name": "Himanshu",
             "email": "hkashyap488@gmail.com",
             "password": "1234",
-            "confirmToken": "123456789",
             "isConfirm": true
         }).then((res)=>{
             expect(res.body.statusCode).toBe(201)
