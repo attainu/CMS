@@ -20,6 +20,7 @@ module.exports = {
             const trainer = []
             for(let i=0; i<tra.length; i++){
                 const obj = {}
+                obj.id = tra[i]._id
                 obj.name = tra[i].name
                 obj.price = tra[i].price
                 trainer.push(obj)
@@ -44,6 +45,7 @@ module.exports = {
 
             for(let i=0; i<trainerWorkoutPlan.length; i++){
                 const obj = {}
+                obj.id = trainerWorkoutPlan[i]._id
                 obj.name = trainerWorkoutPlan[i].workoutPlan
                 obj.price = trainerWorkoutPlan[i].price
                 obj.image = trainerWorkoutPlan[i].image
@@ -55,29 +57,13 @@ module.exports = {
             const diet = []
             for(let i=0; i<trainerDietPlan.length; i++){
                 const obj = {}
+                obj.id = trainerDietPlan[i]._id
                 obj.name = trainerDietPlan[i].dietPlan
                 obj.price = trainerDietPlan[i].price
                 obj.image = trainerDietPlan[i].image
                 obj.category = trainerDietPlan[i].category
                 diet.push(obj)
             }     
-
-            // function isEmpty(obj) {
-            //     for(var key in obj) {
-            //         if(obj.hasOwnProperty(key))
-            //             return false;
-            //     }
-            //     return true;
-            // }
-
-            // if(isEmpty(trainerDiet)){
-            //     traDiet = null
-            // }
-            // if(isEmpty(trainerWorkout)){
-            //     traWorkout = null
-            // }
-
-         
             return res.status(200).json({ statusCode: 200,  trainerInfo , diet , workout }) 
         }catch(err){
             console.log(err)
