@@ -36,7 +36,7 @@ module.exports = {
                 obj.city = `${domainName}/findgym/state/${farr[k]}`
                 arr1.push(obj)
             }
-            return res.status(200).json({ statusCode: 200, arr1})
+            return res.status(200).json({ statusCode: 200, gym: arr1})
         }catch(err){
             return res.status(500).json({ statusCode:500, message: 'Server Error' })
         }
@@ -60,7 +60,7 @@ module.exports = {
                 obj.detaills = `${domainName}/findgym/city/${farr[k]}`
                 arr1.push(obj)
             }
-            return res.status(200).json({ statusCode:200, arr1})
+            return res.status(200).json({ statusCode:200, gym: arr1})
         }catch(err){
             return res.status(500).json({ statusCode:500, message: 'Server Error' })
         }
