@@ -13,6 +13,8 @@ module.exports = {
             if (!email || !name || !password) {
                 return res.status(400).json({ statusCode: 400, message: "Bad request" });
             }
+            const check = await User.findOne({email})
+            if(check) return res.status(401).json({statusCode: 401, message: 'Bad request Email Already exist...!!!'})
             const user = await User.create({ email, name, password, isConfirm});
             await user.generateToken('confirm');
             return res.status(201).json({statusCode: 201, confirmation: 'Confrmation Email has been sent successfully please check your mail to confrim the Account.'});
