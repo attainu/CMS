@@ -1,3 +1,15 @@
+# Project Report Link
+
+    https://docs.google.com/document/d/1bqghi-T6iiYl2VvCqCBqE2dU410wLxLXtLVjoAdMEco/edit?usp=sharing
+
+# Deployment link for mongo atlas
+	# for server: https://perfect-fitnessh.herokuapp.com
+	# for client: https://agile-shelf-89927.herokuapp.com
+
+# Deployment link for Elephant sql
+	# for server: https://perfect-fitnessn.herokuapp.com
+	# for client: https://paymentperfect-fitness.herokuapp.com
+
 # Perfect-Fitness
 Project done by Nilesh and Himanshu
 
@@ -284,8 +296,3 @@ Project done by Nilesh and Himanshu
 	
 	This route will allow users to see review added by the users for a particular 
 	Product.
-
-
-# Project Report Link
-
-    https://docs.google.com/document/d/1bqghi-T6iiYl2VvCqCBqE2dU410wLxLXtLVjoAdMEco/edit?usp=sharing
