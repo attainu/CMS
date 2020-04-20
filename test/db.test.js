@@ -280,7 +280,7 @@ describe('DataBseRelatedTests', function(){
         request(app).post('/add/trainer').set({ Authorization: token }).send({
             "name": "Himanshu",
             "email": "hk@pf.com",
-            "perEmail": "hkashyap488@gmail.com",
+            "perEmail": "sachingolu1998@gmail.com",
             "password": "1234",
             "price": 4000,
             "isConfirm": true
